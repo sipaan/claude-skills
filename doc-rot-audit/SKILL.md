@@ -137,7 +137,39 @@ For each, verify the prescribed thing actually exists:
 - Monitoring: is the SDK installed and called?
 - Security: are the documented headers/sanitizers in the code?
 
-Aspirational content isn't always wrong to keep — but it must be honestly labeled. A doc describing a "planned" setup is fine; a doc describing the same setup as if it's current is rot.
+Apply the test in the next subsection before flagging anything as rot.
+
+#### Aspirational content is rot only when it's dishonest
+
+The test: **a doc clearly labeled "planned," "aspirational," "future state," or "Status: Not yet implemented" is not rot, even if nothing is built yet.** A doc describing the same unbuilt thing in present tense ("the system uses X", "tests run on every PR via Vitest") is rot.
+
+The distinction is honesty about current state, not whether the thing exists. Honest planning docs are valuable head-start work for whoever picks up the task. Dishonest descriptions actively mislead every reader who takes them at face value.
+
+**Honest example (not rot):**
+
+```markdown
+# TESTING-PLAN.md
+
+> **Status: Aspirational.** No test framework is installed yet.
+> This is the planned setup for when test discipline is introduced.
+
+[detailed Vitest config, RTL examples, etc.]
+```
+
+This is fine. Keep it. The header makes the doc's status unambiguous and the configs save real setup time later.
+
+**Dishonest example (rot):**
+
+```markdown
+# TESTING.md
+
+We use Vitest for unit tests and Playwright for E2E.
+Run `npm test` before every PR.
+```
+
+…in a repo with zero `*.test.ts` files and no Vitest in `package.json`. **This is rot.** Either the framework needs to be installed to match the doc, or the doc needs an "aspirational" header (and probably a rename) to match the code.
+
+When in doubt, look at the doc's first paragraph. If it announces its planning status, it's safe. If it talks about the system in present tense, every claim it makes must verify against the code.
 
 ### Step 4: Stale architectural claims
 
