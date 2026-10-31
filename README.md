@@ -1,3 +1,5 @@
+> **Frozen.** This skill is now maintained in a private repository. This copy is frozen as of 2026-10-31 and will not get updates.
+
 # claude-skills
 
 A collection of Claude Code skills for software-engineering and project-hygiene tasks.
